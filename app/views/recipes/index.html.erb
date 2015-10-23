@@ -1,7 +1,22 @@
 <div class="container">
 	<h1>Recipes List</h1>
-	<hr>
+	<hr/>
 	<% @recipes.each do |recipe|%>
-
+		<div class="row">
+			<div class="col-md-2 center">
+				<section class="chef_info center">
+					<%= gravatar_for recipe.chef, size: 100 %>
+					<h5>Chef Name: <%= recipe.chef.name %></h5>
+				</section>	
+			</div>
+			<div class="col-lg-8 well">
+					<h4><%= link_to recipe.name, " "%></h4>
+					<p><%= recipe.summary%></p>
+					<p>
+						<span class="quiet"><small><%= time_ago_in_words(recipe.created_at) %></small></span>
+					</p>
+			</div>
+		</div>
 	<% end %>
+	<hr/>
 </div>
