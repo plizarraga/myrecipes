@@ -12,6 +12,14 @@ class RecipesController < ApplicationController
 	end
 
 	def create
+		@recipe = Recipe.new(recipe_params)
+		@recipe.chef = Chef.find(1)
+		if @recipe.save
+			flash[:success] = "Your recipe was created succesfully!"
+      		redirect_to recipes_path
+		else
+			render :new
+		end
 	end
 	
 	def edit
@@ -22,4 +30,9 @@ class RecipesController < ApplicationController
 
 	def delete
 	end
+
+	private
+		def recipe_params
+			params.require(:recipe).permit(:name, :summary, :description)
+		end
 end
